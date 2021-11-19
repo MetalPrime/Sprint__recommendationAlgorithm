@@ -5,6 +5,7 @@ const category2ascent = document.querySelector('.c2ascent');
 const category1descent = document.querySelector('.c1descent');
 const category2descent = document.querySelector('.c2descent');
 
+
 const list_group = document.querySelector('.list-group');
 
 const select__1s2 = document.querySelector('#select__1s2');
@@ -22,6 +23,9 @@ const btn_recommend = document.querySelector('.btn_recommend');
 
 const result_compare = document.querySelector('.result_compare');
 const personas__uno = document.querySelector('.personas');
+
+
+
 
 let view;
 let options;
@@ -138,7 +142,7 @@ let optionsS4;
 
 })();
 
-//Hilo principal -- Sprint 4
+////////////////  Hilo principal -- Sprint 4 //////////////////////////////
 (async () => {
     ///csv 1 personas
     let response = await fetch('Sprint4_personas.csv');
@@ -147,7 +151,7 @@ let optionsS4;
 
     response = csvToArray(response);
 
-    ////csv 2 pizzas
+    ///////CSV de las Pizzas
 
     let responseTwo = await fetch('Sprint4_pizza.csv');
 
@@ -155,30 +159,38 @@ let optionsS4;
 
     responseTwo = csvToArray(responseTwo);
 
-    ////////// render sliders
+    /////// Render sliders
 
     let listObjects = [];
 
+    //valores del slider
+    let listValuesSlider = [];
 
     let baseObject = Object.keys(response[0]);
-    baseObject = baseObject.filter(element => element != 'Nombre/Topping');
+    //toping
+    baseObject = baseObject.filter(element => element != 'nombre');
     baseObject = baseObject.forEach((element) => {
 
         let obj = { nombre: element }
 
         listObjects.push(obj)
+
     });
+    console.log(listObjects)
 
     listObjects.forEach((element) => {
-
 
         optionsS4 = new selectOption(element);
         select__s4_slider.appendChild(optionsS4.renderSlider());
 
+        listValuesSlider.push(valueSlider(element.nombre));
+
     });
 
 
-    //////////////aqui inicia la magia
+
+
+    //////////////Similarity Behaviour
 
     response.forEach(element => {
 
@@ -188,7 +200,7 @@ let optionsS4;
     });
 
     btn_recommend.addEventListener('click', function () {
-
+        
         let list = personKNN(selectedValue(select__s4_persona.value, response), response);
         console.log(list);
         let kN = getKvalueFromList(response);
@@ -207,13 +219,28 @@ let optionsS4;
 
 
         KListProps = similarityBehaviour(KListProps);
-        getPossibleOptions(responseTwo, KListProps);
+        KListProps = getPossibleOptions(responseTwo, KListProps);
         console.log({ responseTwo });
         console.log({ KListProps });
     })
 
 })();
 
+
+///Function Value Slider
+function valueSlider(slider) {
+
+    const valueSlider = select__s4_slider.querySelector("#" + slider);
+    let valueSliderOption = {}
+
+    valueSliderOption = { name: slider, value: valueSlider.value };
+    console.log("value " + slider + valueSlider.value);
+
+    console.log({ valueSliderOption })
+    return valueSliderOption;
+}
+
+//CSV partido a arreglo
 
 function csvToArray(str, delimiter = ",") {
     const headers = str.slice(0, str.indexOf("\n")).split(delimiter);
@@ -245,6 +272,7 @@ function selectedValue(value, list) {
 
 //excluir name 
 function similitudCoseno(a, b) {
+
     const vectorA = personToVector(a);
     const vectorB = personToVector(b);
 
@@ -320,6 +348,10 @@ function CheckDirection(vectorA, vectorB) {
 
 }
 
+
+
+/// Nearest Neighbour 
+
 function getDistToEqualDirectionVector(vectorA, vectorB) {
 
     //return Math.abs(CalculateMagnitude(vectorA)-CalculateMagnitude(vectorB)/Math.max(CalculateMagnitude(vectorA),CalculateMagnitude(vectorB)));
@@ -355,11 +387,17 @@ function personKNN(person, list) {
     return kNNlist;
 }
 
+
+
 function sortKNN(list) {
     return list.sort(function (a, b) {
         return b.similitudCoseno - a.similitudCoseno;
     });
 }
+
+
+
+//// Function Similarity Behaviour
 
 function similarityBehaviour(list) {
     list = list.map(element => {
@@ -401,6 +439,8 @@ function similarityBehaviour(list) {
     return counts;
 }
 
+////
+
 function sortForProps(list) {
     let sortList = Object.keys(list).sort(function (a, b) {
 
@@ -416,13 +456,11 @@ function getPossibleOptions(listOptions, listElementsInCommun) {
 
 
     const getSimiliarPizzas = (compareProp) =>
-        listOptions.filter(option => option[compareProp] === '10')
-        ;
+        listOptions.filter(option => option[compareProp] === '10');
+
 
     return result = Object.keys(listElementsInCommun).map(getSimiliarPizzas);
-
-
+    //  listElementsInCommun[keys]map.((element) => {listOptions.filter( option => option[element] === '10')})
 
 }
 
-////////////////sprint 1 elementos
