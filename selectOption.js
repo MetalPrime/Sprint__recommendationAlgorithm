@@ -19,7 +19,7 @@ class selectOption {
         container.innerHTML = `
         <p>${this.data.nombre}</p>
         
-        <input type="range" min="0" max="10" step="1" class="slider" id=${this.data.nombre} value="10">
+        <input type="range" min="0" max="1" step="1" class="slider" id=${this.data.nombre} value="1">
         `
         slider.appendChild(container);
 

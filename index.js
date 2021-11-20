@@ -24,12 +24,12 @@ const btn_recommend = document.querySelector('.btn_recommend');
 const result_compare = document.querySelector('.result_compare');
 const personas__uno = document.querySelector('.personas');
 
-
-
-
 let view;
 let options;
 let optionsS4;
+let sliders = [];
+let listValuesSlider=[];
+let num=0;
 
 //Hilo principal -- Sprint 1
 (async () => {
@@ -153,18 +153,18 @@ let optionsS4;
 
     ///////CSV de las Pizzas
 
-    let responseTwo = await fetch('Sprint4_pizza.csv');
+    let pizzaFlavours = await fetch('Sprint4_pizza.csv');
 
-    responseTwo = await responseTwo.text();
+    pizzaFlavours = await pizzaFlavours.text();
 
-    responseTwo = csvToArray(responseTwo);
+    pizzaFlavours = csvToArray(pizzaFlavours);
 
     /////// Render sliders
 
     let listObjects = [];
 
     //valores del slider
-    let listValuesSlider = [];
+
 
     let baseObject = Object.keys(response[0]);
     //toping
@@ -176,14 +176,15 @@ let optionsS4;
         listObjects.push(obj)
 
     });
-    console.log(listObjects)
+    // console.log(listObjects+"listobjets")
 
     listObjects.forEach((element) => {
 
         optionsS4 = new selectOption(element);
         select__s4_slider.appendChild(optionsS4.renderSlider());
+        sliders.push(element.nombre);
+        //listValuesSlider.push(valueSlider(element.nombre));
 
-        listValuesSlider.push(valueSlider(element.nombre));
 
     });
 
@@ -199,14 +200,45 @@ let optionsS4;
         select__s4_persona.appendChild(options.render());
     });
 
-    btn_recommend.addEventListener('click', function () {
-        
-        let list = personKNN(selectedValue(select__s4_persona.value, response), response);
-        console.log(list);
-        let kN = getKvalueFromList(response);
-        list = sortKNN(list);
-        const kList = list.slice(0, kN);
 
+    const selectedPerson = selectedValue(select__s4_persona.value, response);
+    ///// BUTTON SPRINT 4
+
+    btn_recommend.addEventListener('click', function () {
+
+        //Lista de perosnas cercanas entra el valor seleccionado y la lista
+        
+        const modPerson= Object.assign({}, selectedPerson)
+      
+        
+        
+        sliders.forEach(elem => {
+            valueSlider(elem);
+        })
+        
+
+        ///Modificar el peso del topping 
+
+        Object.keys(modPerson).forEach(function (key) {
+            listValuesSlider.forEach(elem => {
+                if (elem.name === key ) {
+                    
+                    modPerson[key] = (Number.parseFloat(modPerson[key]) * (Number.parseFloat(elem.value)/100)*100) ;
+                }
+            });
+        });
+        console.log(modPerson); 
+
+
+        
+        
+
+        let listSimilitudCoseno = personKNN(modPerson,response);
+        // console.log(listSimilitudCoseno);
+        //El Nearest neighbour (raiz cuadrada del total)
+        let kN = getKvalueFromList(response);
+        listSimilitudCoseno = sortKNN(listSimilitudCoseno);
+        const kList = listSimilitudCoseno.slice(0, kN);
         let KListProps = []
         kList.forEach(compareThing => {
             response.forEach(element => {
@@ -214,30 +246,35 @@ let optionsS4;
                     KListProps.push(element);
                 }
             })
-
         })
 
+        let recommendedPizzas = [];
+        let peopleSimilar =[];
 
-        KListProps = similarityBehaviour(KListProps);
-        KListProps = getPossibleOptions(responseTwo, KListProps);
-        console.log({ responseTwo });
-        console.log({ KListProps });
+
+        peopleSimilar = similarityBehaviour(KListProps);
+        recommendedPizzas = getPossibleOptions(pizzaFlavours, peopleSimilar);
+        console.log({ recommendedPizzas });
+        // console.log({ KListProps });
+
     })
 
 })();
 
 
-///Function Value Slider
+
+///Function Value Slider 
 function valueSlider(slider) {
+
 
     const valueSlider = select__s4_slider.querySelector("#" + slider);
     let valueSliderOption = {}
 
     valueSliderOption = { name: slider, value: valueSlider.value };
-    console.log("value " + slider + valueSlider.value);
-
-    console.log({ valueSliderOption })
-    return valueSliderOption;
+    // console.log("value " + slider + valueSlider.value);
+    listValuesSlider.push(valueSliderOption)
+    // console.log({ valueSliderOption})
+    return listValuesSlider;
 }
 
 //CSV partido a arreglo
@@ -409,16 +446,6 @@ function similarityBehaviour(list) {
         return Object.fromEntries(Object.entries(element).filter(([key, value], index) => index < 5));
     })
 
-    /* list = list.map((element) =>{
-        for (const key in element){
-            if( element[key] <=7){
-                delete element[key];
-            }
-         console.log(key);
-       } 
-       return element;
-    }) */
-
     let itemsInCommun = [];
     list.forEach((element) => {
         for (const key in element) {
@@ -452,15 +479,28 @@ function sortForProps(list) {
     return sortList
 }
 
-function getPossibleOptions(listOptions, listElementsInCommun) {
 
 
+
+/////Opciones para la pizza por usuario
+function getPossibleOptions(allFlavors, listElementsInCommun) {
+    
+    num=0;
+    console.log("antes" + num);
+    num=listValuesSlider.filter((slider)=> (slider.value ==="1")).length;
+    
+    
+    console.log(num);
     const getSimiliarPizzas = (compareProp) =>
-        listOptions.filter(option => option[compareProp] === '10');
+        allFlavors.filter(option => option[compareProp] === '10');
 
-
-    return result = Object.keys(listElementsInCommun).map(getSimiliarPizzas);
-    //  listElementsInCommun[keys]map.((element) => {listOptions.filter( option => option[element] === '10')})
+    
+     return pizzas = Object.keys(listElementsInCommun).map(getSimiliarPizzas) ;
+        
+    //  listElementsInCommun[keys]map.((element) => {allFlavors.filter( option => option[element] === '10')})
 
 }
+
+
+
 
