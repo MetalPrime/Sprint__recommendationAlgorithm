@@ -23,13 +23,16 @@ const btn_recommend = document.querySelector('.btn_recommend');
 
 const result_compare = document.querySelector('.result_compare');
 const personas__uno = document.querySelector('.personas');
+const personas = document.querySelector('.personas_s4');
+
+const recommendation = document.querySelector('.recommendation');
 
 let view;
 let options;
 let optionsS4;
 let sliders = [];
-let listValuesSlider=[];
-let num=0;
+let listValuesSlider = [];
+let num = 0;
 
 //Hilo principal -- Sprint 1
 (async () => {
@@ -201,44 +204,46 @@ let num=0;
     });
 
 
-    const selectedPerson = selectedValue(select__s4_persona.value, response);
+    
     ///// BUTTON SPRINT 4
 
     btn_recommend.addEventListener('click', function () {
 
         //Lista de perosnas cercanas entra el valor seleccionado y la lista
-        
-        const modPerson= Object.assign({}, selectedPerson)
-      
-        
-        
+        const selectedPerson = selectedValue(select__s4_persona.value, response);
+
+        const modPerson = Object.assign({}, selectedPerson)
+
+
+
         sliders.forEach(elem => {
             valueSlider(elem);
         })
-        
+
 
         ///Modificar el peso del topping 
 
         Object.keys(modPerson).forEach(function (key) {
             listValuesSlider.forEach(elem => {
-                if (elem.name === key ) {
-                    
-                    modPerson[key] = (Number.parseFloat(modPerson[key]) * (Number.parseFloat(elem.value)/100)*100) ;
+                if (elem.name === key) {
+
+                    modPerson[key] = (Number.parseFloat(modPerson[key]) * (Number.parseFloat(elem.value) / 100) * 100);
                 }
             });
         });
-        console.log(modPerson); 
+        console.log(modPerson);
 
 
-        
-        
 
-        let listSimilitudCoseno = personKNN(modPerson,response);
+
+
+        let listSimilitudCoseno = personKNN(modPerson, response);
         // console.log(listSimilitudCoseno);
         //El Nearest neighbour (raiz cuadrada del total)
         let kN = getKvalueFromList(response);
         listSimilitudCoseno = sortKNN(listSimilitudCoseno);
         const kList = listSimilitudCoseno.slice(0, kN);
+        console.log({kList});
         let KListProps = []
         kList.forEach(compareThing => {
             response.forEach(element => {
@@ -249,12 +254,25 @@ let num=0;
         })
 
         let recommendedPizzas = [];
-        let peopleSimilar =[];
+        let peopleSimilar = [];
 
 
         peopleSimilar = similarityBehaviour(KListProps);
+        naiveAverage(KListProps);
         recommendedPizzas = getPossibleOptions(pizzaFlavours, peopleSimilar);
         console.log({ recommendedPizzas });
+
+        /* recommendedPizzas.forEach(pizza => {
+            pizza.forEach(innerPizza => {
+                recommendation.innerHTML += (`<p>${innerPizza.Pizza}</p>`);
+            })
+
+        }) */
+
+        kList.forEach(persona => {
+            personas.innerHTML += (`<p> Nombre ${persona.nombre} </p>`)
+        })
+
         // console.log({ KListProps });
 
     })
@@ -432,6 +450,16 @@ function sortKNN(list) {
     });
 }
 
+function sortForProps(list) {
+    let sortList = Object.keys(list).sort(function (a, b) {
+
+        return list[b] - list[a]
+    }).reduce((acc, v) => {
+        acc[v] = list[v];
+        return acc;
+    }, {});
+    return sortList
+}
 
 
 //// Function Similarity Behaviour
@@ -468,36 +496,58 @@ function similarityBehaviour(list) {
 
 ////
 
-function sortForProps(list) {
-    let sortList = Object.keys(list).sort(function (a, b) {
+function naiveAverage(list) {
+    console.log({ list })
+    const { nombre, ...seed } = list[0];
 
-        return list[b] - list[a]
-    }).reduce((a, v) => {
-        a[v] = list[v];
-        return a;
-    }, {});
-    return sortList
+    const transformed = list.reduce((acc, { nombre, ...item }) => {
+        const newVal = { ...acc };
+
+
+        for (let prop in item) {
+            newVal[prop] = (
+                (
+                    (newVal[prop] ?? 0) + parseFloat(item[prop])
+                ) / 2
+            );
+        }
+
+        return newVal;
+    }, {})
+
+    console.log({transformed});
+
+    return transformed;
+
 }
-
 
 
 
 /////Opciones para la pizza por usuario
 function getPossibleOptions(allFlavors, listElementsInCommun) {
-    
-    num=0;
+
+    num = 0;
     console.log("antes" + num);
-    num=listValuesSlider.filter((slider)=> (slider.value ==="1")).length;
-    
-    
-    console.log(num);
-    const getSimiliarPizzas = (compareProp) =>
-        allFlavors.filter(option => option[compareProp] === '10');
+    num = listValuesSlider.filter((slider) => (slider.value === "1")).length;
+
+
+    console.log({ listElementsInCommun });
+    /* const getSimiliarPizzas = (compareProp) => {
+        allFlavors.filter(option => { option[compareProp] === '10' });
+    } 
+    pizzas = Object.keys(listElementsInCommun).map(getSimiliarPizzas);
+    */
+
+    const response = Object.keys(listElementsInCommun).reduce((acc, compareProp) => {
+        return acc.filter(option => { return option[compareProp] === '10' });
+    }, allFlavors);
+    //sacamos las keys [queso, jamón], reducer el estado inicial son todas las pizzas, recibe todas las pizzas con queso filtradas en su segunda vuelta,
+    //y en su tercera vuelta por jamón 
+    console.log({ response })
+
+    return response;
 
     
-     return pizzas = Object.keys(listElementsInCommun).map(getSimiliarPizzas) ;
-        
-    //  listElementsInCommun[keys]map.((element) => {allFlavors.filter( option => option[element] === '10')})
 
 }
 
