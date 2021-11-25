@@ -209,6 +209,9 @@ let num = 0;
 
     btn_recommend.addEventListener('click', function () {
 
+        recommendation.innerHTML = "";
+        personas.innerHTML = "";
+
         //Lista de perosnas cercanas entra el valor seleccionado y la lista
         const selectedPerson = selectedValue(select__s4_persona.value, response);
 
@@ -262,15 +265,15 @@ let num = 0;
         recommendedPizzas = getPossibleOptions(pizzaFlavours, peopleSimilar);
         console.log({ recommendedPizzas });
 
-        /* recommendedPizzas.forEach(pizza => {
-            pizza.forEach(innerPizza => {
-                recommendation.innerHTML += (`<p>${innerPizza.Pizza}</p>`);
-            })
+        recommendedPizzas.forEach(pizza => {
+            
+                recommendation.innerHTML += (`<p>${pizza.Pizza}</p>`);
+            
 
-        }) */
+        }) 
 
         kList.forEach(persona => {
-            personas.innerHTML += (`<p> Nombre ${persona.nombre} </p>`)
+            personas.innerHTML += (`<p> Nombre ${persona.nombre} SimilitudCoseno: ${persona.similitudCoseno} % </p>`)
         })
 
         // console.log({ KListProps });
