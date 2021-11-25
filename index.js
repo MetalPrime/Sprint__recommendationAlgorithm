@@ -33,6 +33,7 @@ let optionsS4;
 let sliders = [];
 let listValuesSlider = [];
 let num = 0;
+let naive = 0;
 
 //Hilo principal -- Sprint 1
 (async () => {
@@ -217,7 +218,7 @@ let num = 0;
 
         const modPerson = Object.assign({}, selectedPerson)
 
-
+        console.log(modPerson);
 
         sliders.forEach(elem => {
             valueSlider(elem);
@@ -230,7 +231,7 @@ let num = 0;
             listValuesSlider.forEach(elem => {
                 if (elem.name === key) {
 
-                    modPerson[key] = (Number.parseFloat(modPerson[key]) * (Number.parseFloat(elem.value) / 100) * 100);
+                    modPerson[key] = (Number.parseFloat(modPerson[key]) * (Number.parseFloat(elem.value)*100)/100 );
                 }
             });
         });
@@ -262,6 +263,8 @@ let num = 0;
 
         peopleSimilar = similarityBehaviour(KListProps);
         naiveAverage(KListProps);
+        naive=naiveAverage(KListProps);
+        
         recommendedPizzas = getPossibleOptions(pizzaFlavours, peopleSimilar);
         console.log({ recommendedPizzas });
 
@@ -275,10 +278,12 @@ let num = 0;
         kList.forEach(persona => {
             personas.innerHTML += (`<p> Nombre ${persona.nombre} SimilitudCoseno: ${persona.similitudCoseno} % </p>`)
         })
-
+        leastMisery();
+        maxPleasure();
         // console.log({ KListProps });
 
     })
+   
 
 })();
 
@@ -523,6 +528,82 @@ function naiveAverage(list) {
     return transformed;
 
 }
+
+function maxPleasure (){
+
+    let pleasure  = [];
+
+    console.log(naive);
+
+    for(let i=0; i<Object.keys(naive).length;i++){
+        
+        
+        if(Object.values(naive)[i]>=8){
+            
+            // const name = Object.keys(naive)[i]
+            console.log(name);
+            const obj ={
+                name : Object.keys(naive)[i],
+                value : Object.values(naive)[i],
+            }
+
+           
+            
+            pleasure.push(obj)
+
+            console.log(pleasure)
+        }
+        
+    }
+
+
+    
+
+
+}
+
+function leastMisery (){
+
+    let misery  = [];
+
+    console.log(naive);
+
+    for(let i=0; i<Object.keys(naive).length;i++){
+        
+        
+        if(Object.values(naive)[i]<=5){
+            
+            // const name = Object.keys(naive)[i]
+            console.log(name);
+            const obj ={
+                name : Object.keys(naive)[i],
+                value : Object.values(naive)[i],
+            }
+
+           
+            
+            misery.push(obj)
+
+            console.log(misery)
+        }
+        
+    }
+
+
+    
+        
+       
+
+}
+
+
+
+
+function desviacionestandar(){
+
+}
+
+
 
 
 
