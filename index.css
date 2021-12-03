@@ -90,3 +90,38 @@ figure h5{
 .noDisplay{
     display: none;
 }
+
+.noDisplay{
+    display: none;
+}
+
+.sprint__1{
+    padding: 20px;
+    margin: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: lightcyan;
+}
+
+.sprint__2{
+    padding: 20px;
+    margin: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: lightcyan;
+}
+.sprint__3{
+    padding: 20px;
+    margin: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: lightcyan;
+}
+
+.sprint__4{
+    padding: 20px;
+    margin: 30px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: lightcyan;
+}

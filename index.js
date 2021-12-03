@@ -24,6 +24,7 @@ const btn_recommend = document.querySelector('.btn_recommend');
 const result_compare = document.querySelector('.result_compare');
 const personas__uno = document.querySelector('.personas');
 const personas = document.querySelector('.personas_s4');
+const select__aggreation = document.querySelector('.select__aggreation');
 
 const recommendation = document.querySelector('.recommendation');
 
@@ -215,10 +216,10 @@ let naive = 0;
 
         //Lista de perosnas cercanas entra el valor seleccionado y la lista
         const selectedPerson = selectedValue(select__s4_persona.value, response);
+        let modPerson = {}
+        modPerson = {...selectedPerson}
 
-        const modPerson = Object.assign({}, selectedPerson)
-
-        console.log(modPerson);
+        console.log({modPerson});
 
         sliders.forEach(elem => {
             valueSlider(elem);
@@ -227,15 +228,16 @@ let naive = 0;
 
         ///Modificar el peso del topping 
 
-        Object.keys(modPerson).forEach(function (key) {
+        Object.keys(selectedPerson).forEach(function (key) {
             listValuesSlider.forEach(elem => {
                 if (elem.name === key) {
-
-                    modPerson[key] = (Number.parseFloat(modPerson[key]) * (Number.parseFloat(elem.value)*100)/100 );
+                    console.log(elem.value);
+                    modPerson[key] = (Number.parseFloat(selectedPerson[key]) * (Number.parseFloat(elem.value)));
                 }
             });
         });
-        console.log(modPerson);
+        console.log({selectedPerson})
+        console.log({modPerson});
 
 
 
@@ -258,14 +260,32 @@ let naive = 0;
         })
 
         let recommendedPizzas = [];
-        let peopleSimilar = [];
+        let propsSimilar = {};
 
+        switch (select__aggreation.value) {
+            case "least":
+                propsSimilar = leastMisery();
+                break;
+            case "maximun":
+                propsSimilar = maxPleasure();
+                break;
+            case "median":
+                propsSimilar = medianSatisfaction();
+                break;
+            case "similarity":
+                propsSimilar = similarityBehaviour(KListProps);
+                break;
 
-        peopleSimilar = similarityBehaviour(KListProps);
-        naiveAverage(KListProps);
-        naive=naiveAverage(KListProps);
+        }
         
-        recommendedPizzas = getPossibleOptions(pizzaFlavours, peopleSimilar);
+        
+        
+
+        naive=naiveAverage(KListProps);
+        console.log({ naive });
+        console.log(desviacionestandar(naive))
+        
+        recommendedPizzas = getPossibleOptions(pizzaFlavours, propsSimilar);
         console.log({ recommendedPizzas });
 
         recommendedPizzas.forEach(pizza => {
@@ -278,8 +298,7 @@ let naive = 0;
         kList.forEach(persona => {
             personas.innerHTML += (`<p> Nombre ${persona.nombre} SimilitudCoseno: ${persona.similitudCoseno} % </p>`)
         })
-        leastMisery();
-        maxPleasure();
+
         // console.log({ KListProps });
 
     })
@@ -531,40 +550,36 @@ function naiveAverage(list) {
 
 function maxPleasure (){
 
-    let pleasure  = [];
+    let pleasure  = {};
 
     console.log(naive);
 
     for(let i=0; i<Object.keys(naive).length;i++){
         
-        
         if(Object.values(naive)[i]>=8){
             
-            // const name = Object.keys(naive)[i]
-            console.log(name);
-            const obj ={
-                name : Object.keys(naive)[i],
-                value : Object.values(naive)[i],
-            }
-
-           
             
-            pleasure.push(obj)
-
-            console.log(pleasure)
+              pleasure[ Object.keys(naive)[i]] = Object.values(naive)[i];
+                
+             
         }
-        
+            
+            
+            
+
+            
+        }
+        return pleasure;
+
     }
 
 
-    
 
 
-}
 
 function leastMisery (){
 
-    let misery  = [];
+    let misery  = {};
 
     console.log(naive);
 
@@ -573,34 +588,72 @@ function leastMisery (){
         
         if(Object.values(naive)[i]<=5){
             
-            // const name = Object.keys(naive)[i]
-            console.log(name);
-            const obj ={
-                name : Object.keys(naive)[i],
-                value : Object.values(naive)[i],
-            }
+
+            misery[ Object.keys(naive)[i]] = Object.values(naive)[i];
+            } 
 
            
             
-            misery.push(obj)
+            
 
-            console.log(misery)
+            
         }
-        
+        return misery 
+
     }
 
 
     
-        
        
 
+
+
+
+
+
+function desviacionestandar(arr){
+    let entries = Object.entries(arr);
+    console.log(entries);
+    let mean = entries.reduce((acc, curr)=>{
+        return acc + curr
+      }, 0) / entries.length;
+       
+      // Assigning (value - mean) ^ 2 to every entriesay item
+      entries = entries.map((k)=>{
+        return (k - mean) ** 2
+      })
+       
+      // Calculating the sum of updated entriesay
+     let sum = entries.reduce((acc, curr)=> acc + curr, 0);
+      
+     // Calculating the variance
+     let variance = sum / entries.length
+      
+     // Returning the Standered deviation
+     return Math.sqrt(sum / entries.length)
 }
 
+function medianSatisfaction(){
+    let medium  = {};
 
+    console.log(naive);
 
+    for(let i=0; i<Object.keys(naive).length;i++){
+        
+        
+        if(Object.values(naive)[i]>=6 && Object.values(naive)[i]<=9){
+            
 
-function desviacionestandar(){
+            medium[ Object.keys(naive)[i]] = Object.values(naive)[i];
+            } 
 
+           
+            
+            
+
+            
+        }
+        return medium 
 }
 
 
