@@ -1,3 +1,4 @@
+
 const categoryNameascent = document.querySelector('.cNameascent');
 const categoryNamedescent = document.querySelector('.cNamedescent');
 const category1ascent = document.querySelector('.c1ascent');
@@ -36,119 +37,71 @@ let listValuesSlider = [];
 let num = 0;
 let naive = 0;
 
-//Hilo principal -- Sprint 1
-(async () => {
-    let response = await fetch('sprint3Fix.csv');
-
-    response = await response.text();
-
-    response = csvToArray(response);
-
-
-
-    view = new viewData(response);
-
-    list_group.appendChild(view.render());
 
 
 
 
-})();
-
-//Hilo principal -- Sprint 2
-(async () => {
-    let response = await fetch('sprint3Fix.csv');
-
-    response = await response.text();
-
-    response = csvToArray(response);
 
 
+// //Hilo principal -- Sprint 3
+// (async () => {
+//     let response = await fetch('sprint3Fix.csv');
 
-    view = new viewData(response);
+//     response = await response.text();
 
-    //list_group.appendChild(view.render());
-
-    response.forEach(element => {
-
-        options = new selectOption(element)
-        select__1s2.appendChild(options.render());
-        select__2s2.appendChild(options.render());
-    });
-
-    btn_compare.addEventListener('click', function () {
-
-        let selectedOption1 = selectedValue(select__1s2.value, response);
-        let selectedOption2 = selectedValue(select__2s2.value, response);
-
-        if (CheckDirection(selectedOption1, selectedOption2)) {
-            console.log('entro');
-            result_compare.innerHTML = `${getDistToEqualDirectionVector(selectedOption1, selectedOption2)} %`;
-        } else {
-            result_compare.innerHTML = `${similitudCoseno(selectedOption1, selectedOption2)} %`;
-        }
+//     response = csvToArray(response);
 
 
+//     response.forEach(element => {
 
-    })
+//         options = new selectOption(element)
+//         select__s3.appendChild(options.render());
+//     });
 
+//     btn_neighbours.addEventListener('click', function () {
+//         result_compare.innerHTML = "";
+//         personas__uno.innerHTML = "";
 
-})();
+//         let list = personKNN(selectedValue(select__s3.value, response), response);
+//         console.log(list);
+//         let kN = getKvalueFromList(response);
+//         list = sortKNN(list);
+//         const kList = list.slice(0, kN);
 
-//Hilo principal -- Sprint 3
-(async () => {
-    let response = await fetch('sprint3Fix.csv');
+//         kList.forEach((elem, index) => {
+//             const personName = elem.nombre;
+//             const personNumber = elem.similitudCoseno;
+//             const personFigure = document.createElement("figure");
+//             const personNameF = document.createElement("h5")
+//             const personNumberF = document.createElement("p");
 
-    response = await response.text();
+//             personNameF.innerText = personName;
+//             personNumberF.innerText = personNumber;
 
-    response = csvToArray(response);
+//             personFigure.appendChild(personNameF);
+//             personFigure.appendChild(personNumberF);
 
+//             personFigure.style.top = (100 * index) + "px"
 
-    response.forEach(element => {
+//             personFigure.style.left = 10 * (100 - personNumber) + "px";
+//             //personFigure.style.right = (window.innerWidth*personNumber/100)+"px";
 
-        options = new selectOption(element)
-        select__s3.appendChild(options.render());
-    });
+//             personas__uno.appendChild(personFigure);
 
-    btn_neighbours.addEventListener('click', function () {
-        result_compare.innerHTML = "";
-        personas__uno.innerHTML = "";
+//         });
 
-        let list = personKNN(selectedValue(select__s3.value, response), response);
-        console.log(list);
-        let kN = getKvalueFromList(response);
-        list = sortKNN(list);
-        const kList = list.slice(0, kN);
-
-        kList.forEach((elem, index) => {
-            const personName = elem.nombre;
-            const personNumber = elem.similitudCoseno;
-            const personFigure = document.createElement("figure");
-            const personNameF = document.createElement("h5")
-            const personNumberF = document.createElement("p");
-
-            personNameF.innerText = personName;
-            personNumberF.innerText = personNumber;
-
-            personFigure.appendChild(personNameF);
-            personFigure.appendChild(personNumberF);
-
-            personFigure.style.top = (100 * index) + "px"
-
-            personFigure.style.left = 10 * (100 - personNumber) + "px";
-            //personFigure.style.right = (window.innerWidth*personNumber/100)+"px";
-
-            personas__uno.appendChild(personFigure);
-
-        });
-
-    })
+//     })
 
 
-})();
+// })();
+
+
+
 
 ////////////////  Hilo principal -- Sprint 4 //////////////////////////////
 (async () => {
+
+
     ///csv 1 personas
     let response = await fetch('Sprint4_personas.csv');
 
@@ -158,6 +111,7 @@ let naive = 0;
 
     ///////CSV de las Pizzas
 
+    // let pizzaFlavours = await fetch('pesos.csv');
     let pizzaFlavours = await fetch('Sprint4_pizza.csv');
 
     pizzaFlavours = await pizzaFlavours.text();
@@ -194,6 +148,11 @@ let naive = 0;
     });
 
 
+    ////////////////////////////////////////////////////////////////////////
+
+    
+
+
 
 
     //////////////Similarity Behaviour
@@ -206,7 +165,7 @@ let naive = 0;
     });
 
 
-    
+
     ///// BUTTON SPRINT 4
 
     btn_recommend.addEventListener('click', function () {
@@ -217,14 +176,20 @@ let naive = 0;
         //Lista de perosnas cercanas entra el valor seleccionado y la lista
         const selectedPerson = selectedValue(select__s4_persona.value, response);
         let modPerson = {}
-        modPerson = {...selectedPerson}
+        modPerson = { ...selectedPerson }
 
-        console.log({modPerson});
+        console.log({ modPerson });
 
         sliders.forEach(elem => {
             valueSlider(elem);
         })
 
+
+
+
+
+
+      
 
         ///Modificar el peso del topping 
 
@@ -236,9 +201,10 @@ let naive = 0;
                 }
             });
         });
-        console.log({selectedPerson})
-        console.log({modPerson});
+        console.log({ selectedPerson })
+        console.log({ modPerson });
 
+       
 
 
 
@@ -249,7 +215,7 @@ let naive = 0;
         let kN = getKvalueFromList(response);
         listSimilitudCoseno = sortKNN(listSimilitudCoseno);
         const kList = listSimilitudCoseno.slice(0, kN);
-        console.log({kList});
+        console.log({ kList });
         let KListProps = []
         kList.forEach(compareThing => {
             response.forEach(element => {
@@ -277,23 +243,23 @@ let naive = 0;
                 break;
 
         }
-        
-        
-        
 
-        naive=naiveAverage(KListProps);
+
+       
+
+        naive = naiveAverage(KListProps);
         console.log({ naive });
         console.log(desviacionestandar(naive))
-        
+
         recommendedPizzas = getPossibleOptions(pizzaFlavours, propsSimilar);
         console.log({ recommendedPizzas });
 
         recommendedPizzas.forEach(pizza => {
-            
-                recommendation.innerHTML += (`<p>${pizza.Pizza}</p>`);
-            
 
-        }) 
+            recommendation.innerHTML += (`<p>${pizza.Pizza}</p>`);
+
+
+        })
 
         kList.forEach(persona => {
             personas.innerHTML += (`<p> Nombre ${persona.nombre} SimilitudCoseno: ${persona.similitudCoseno} % </p>`)
@@ -302,11 +268,23 @@ let naive = 0;
         // console.log({ KListProps });
 
     })
-   
+
 
 })();
 
 
+
+//FunctionShowSliderValue
+
+
+
+function showSliderValue() {
+    rangeBullet.innerHTML = rangeSlider.value;
+    const bulletPosition = (rangeSlider.value / rangeSlider.max);
+    rangeBullet.style.left = (bulletPosition * 578) + "px";
+}
+
+  
 
 ///Function Value Slider 
 function valueSlider(slider) {
@@ -542,118 +520,118 @@ function naiveAverage(list) {
         return newVal;
     }, {})
 
-    console.log({transformed});
+    console.log({ transformed });
 
     return transformed;
 
 }
 
-function maxPleasure (){
+function maxPleasure() {
 
-    let pleasure  = {};
-
-    console.log(naive);
-
-    for(let i=0; i<Object.keys(naive).length;i++){
-        
-        if(Object.values(naive)[i]>=8){
-            
-            
-              pleasure[ Object.keys(naive)[i]] = Object.values(naive)[i];
-                
-             
-        }
-            
-            
-            
-
-            
-        }
-        return pleasure;
-
-    }
-
-
-
-
-
-function leastMisery (){
-
-    let misery  = {};
+    let pleasure = {};
 
     console.log(naive);
 
-    for(let i=0; i<Object.keys(naive).length;i++){
-        
-        
-        if(Object.values(naive)[i]<=5){
-            
+    for (let i = 0; i < Object.keys(naive).length; i++) {
 
-            misery[ Object.keys(naive)[i]] = Object.values(naive)[i];
-            } 
+        if (Object.values(naive)[i] >= 8) {
 
-           
-            
-            
 
-            
+            pleasure[Object.keys(naive)[i]] = Object.values(naive)[i];
+
+
         }
-        return misery 
+
+
+
+
 
     }
+    return pleasure;
 
-
-    
-       
-
-
-
-
-
-
-function desviacionestandar(arr){
-    let entries = Object.entries(arr);
-    console.log(entries);
-    let mean = entries.reduce((acc, curr)=>{
-        return acc + curr
-      }, 0) / entries.length;
-       
-      // Assigning (value - mean) ^ 2 to every entriesay item
-      entries = entries.map((k)=>{
-        return (k - mean) ** 2
-      })
-       
-      // Calculating the sum of updated entriesay
-     let sum = entries.reduce((acc, curr)=> acc + curr, 0);
-      
-     // Calculating the variance
-     let variance = sum / entries.length
-      
-     // Returning the Standered deviation
-     return Math.sqrt(sum / entries.length)
 }
 
-function medianSatisfaction(){
-    let medium  = {};
+
+
+
+
+function leastMisery() {
+
+    let misery = {};
 
     console.log(naive);
 
-    for(let i=0; i<Object.keys(naive).length;i++){
-        
-        
-        if(Object.values(naive)[i]>=6 && Object.values(naive)[i]<=9){
-            
+    for (let i = 0; i < Object.keys(naive).length; i++) {
 
-            medium[ Object.keys(naive)[i]] = Object.values(naive)[i];
-            } 
 
-           
-            
-            
+        if (Object.values(naive)[i] <= 5) {
 
-            
+
+            misery[Object.keys(naive)[i]] = Object.values(naive)[i];
         }
-        return medium 
+
+
+
+
+
+
+    }
+    return misery
+
+}
+
+
+
+
+
+
+
+
+
+
+function desviacionestandar(arr) {
+    let entries = Object.entries(arr);
+    console.log(entries);
+    let mean = entries.reduce((acc, curr) => {
+        return acc + curr
+    }, 0) / entries.length;
+
+    // Assigning (value - mean) ^ 2 to every entriesay item
+    entries = entries.map((k) => {
+        return (k - mean) ** 2
+    })
+
+    // Calculating the sum of updated entriesay
+    let sum = entries.reduce((acc, curr) => acc + curr, 0);
+
+    // Calculating the variance
+    let variance = sum / entries.length
+
+    // Returning the Standered deviation
+    return Math.sqrt(sum / entries.length)
+}
+
+function medianSatisfaction() {
+    let medium = {};
+
+    console.log(naive);
+
+    for (let i = 0; i < Object.keys(naive).length; i++) {
+
+
+        if (Object.values(naive)[i] >= 6 && Object.values(naive)[i] <= 9) {
+
+
+            medium[Object.keys(naive)[i]] = Object.values(naive)[i];
+        }
+
+
+
+
+
+
+    }
+    return medium
 }
 
 
@@ -684,7 +662,7 @@ function getPossibleOptions(allFlavors, listElementsInCommun) {
 
     return response;
 
-    
+
 
 }
 
