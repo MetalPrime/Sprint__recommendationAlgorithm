@@ -31,6 +31,8 @@ class selectOption {
         `
         slider.appendChild(container);
 
+        console.log(this.data.nombre)
+
         setTimeout(() => {
             const rangeSlider = document.getElementById(`${this.data.nombre}`);
             const rangeBullet = document.getElementById(`${this.data.nombre}rs-bullet`);

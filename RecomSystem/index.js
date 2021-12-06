@@ -172,19 +172,22 @@ let naive = 0;
 
     btn_recommend.addEventListener('click', function () {
 
-        recommendation.innerHTML = "";
-        personas.innerHTML = "";
 
-        //Lista de perosnas cercanas entra el valor seleccionado y la lista
-        const selectedPerson = selectedValue(select__s4_persona.value, response);
-        let modPerson = {}
-        modPerson = { ...selectedPerson }
+        window.location.href="./recommend.html"
 
-        console.log({ modPerson });
+        // recommendation.innerHTML = "";
+        // personas.innerHTML = "";
 
-        sliders.forEach(elem => {
-            valueSlider(elem);
-        })
+        // //Lista de perosnas cercanas entra el valor seleccionado y la lista
+        // const selectedPerson = selectedValue(select__s4_persona.value, response);
+        // let modPerson = {}
+        // modPerson = { ...selectedPerson }
+
+        // console.log({ modPerson });
+
+        // sliders.forEach(elem => {
+        //     valueSlider(elem);
+        // })
 
 
 
@@ -193,81 +196,81 @@ let naive = 0;
 
       
 
-        ///Modificar el peso del topping 
+        // ///Modificar el peso del topping 
 
-        Object.keys(selectedPerson).forEach(function (key) {
-            listValuesSlider.forEach(elem => {
-                if (elem.name === key) {
-                    console.log(elem.value);
-                    modPerson[key] = (Number.parseFloat(selectedPerson[key]) * (Number.parseFloat(elem.value)));
-                }
-            });
-        });
-        console.log({ selectedPerson })
-        console.log({ modPerson });
-
-       
-
-
-
-
-        let listSimilitudCoseno = personKNN(modPerson, response);
-        // console.log(listSimilitudCoseno);
-        //El Nearest neighbour (raiz cuadrada del total)
-        let kN = getKvalueFromList(response);
-        listSimilitudCoseno = sortKNN(listSimilitudCoseno);
-        const kList = listSimilitudCoseno.slice(0, kN);
-        console.log({ kList });
-        let KListProps = []
-        kList.forEach(compareThing => {
-            response.forEach(element => {
-                if (compareThing.nombre === element.nombre) {
-                    KListProps.push(element);
-                }
-            })
-        })
-
-        let recommendedPizzas = [];
-        let propsSimilar = {};
-
-        switch (select__aggreation.value) {
-            case "least":
-                propsSimilar = leastMisery();
-                break;
-            case "maximun":
-                propsSimilar = maxPleasure();
-                break;
-            case "median":
-                propsSimilar = medianSatisfaction();
-                break;
-            case "similarity":
-                propsSimilar = similarityBehaviour(KListProps);
-                break;
-
-        }
-
+        // Object.keys(selectedPerson).forEach(function (key) {
+        //     listValuesSlider.forEach(elem => {
+        //         if (elem.name === key) {
+        //             console.log(elem.value);
+        //             modPerson[key] = (Number.parseFloat(selectedPerson[key]) * (Number.parseFloat(elem.value)));
+        //         }
+        //     });
+        // });
+        // console.log({ selectedPerson })
+        // console.log({ modPerson });
 
        
 
-        naive = naiveAverage(KListProps);
-        console.log({ naive });
-        console.log(desviacionestandar(naive))
-
-        recommendedPizzas = getPossibleOptions(pizzaFlavours, propsSimilar);
-        console.log({ recommendedPizzas });
 
 
-        ///AQUI ES DONDE SE PINTA
-        recommendedPizzas.forEach(pizza => {
 
-            recommendation.innerHTML += (`<p>${pizza.nombre}</p>`);
+        // let listSimilitudCoseno = personKNN(modPerson, response);
+        // // console.log(listSimilitudCoseno);
+        // //El Nearest neighbour (raiz cuadrada del total)
+        // let kN = getKvalueFromList(response);
+        // listSimilitudCoseno = sortKNN(listSimilitudCoseno);
+        // const kList = listSimilitudCoseno.slice(0, kN);
+        // console.log({ kList });
+        // let KListProps = []
+        // kList.forEach(compareThing => {
+        //     response.forEach(element => {
+        //         if (compareThing.nombre === element.nombre) {
+        //             KListProps.push(element);
+        //         }
+        //     })
+        // })
+
+        // let recommendedPizzas = [];
+        // let propsSimilar = {};
+
+        // switch (select__aggreation.value) {
+        //     case "least":
+        //         propsSimilar = leastMisery();
+        //         break;
+        //     case "maximun":
+        //         propsSimilar = maxPleasure();
+        //         break;
+        //     case "median":
+        //         propsSimilar = medianSatisfaction();
+        //         break;
+        //     case "similarity":
+        //         propsSimilar = similarityBehaviour(KListProps);
+        //         break;
+
+        // }
 
 
-        })
+       
 
-        kList.forEach(persona => {
-            personas.innerHTML += (`<p> Nombre ${persona.nombre} SimilitudCoseno: ${persona.similitudCoseno} % </p>`)
-        })
+        // naive = naiveAverage(KListProps);
+        // console.log({ naive });
+        // console.log(desviacionestandar(naive))
+
+        // recommendedPizzas = getPossibleOptions(pizzaFlavours, propsSimilar);
+        // console.log({ recommendedPizzas });
+
+
+        // ///AQUI ES DONDE SE PINTA
+        // recommendedPizzas.forEach(pizza => {
+
+        //     recommendation.innerHTML += (`<p>${pizza.nombre}</p>`);
+
+
+        // })
+
+        // kList.forEach(persona => {
+        //     personas.innerHTML += (`<p> Nombre ${persona.nombre} SimilitudCoseno: ${persona.similitudCoseno} % </p>`)
+        // })
 
         // console.log({ KListProps });
 

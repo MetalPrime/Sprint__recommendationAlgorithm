@@ -13,51 +13,61 @@
 
 <body class="bodySliders">
 
-    <h2 style="text-align: center;">Configuraciones</h2>
-    <p>Escoga una persona y el tipo de metodo de agregacion</p>
+   
+   
 
 
 
 
     <div class="sprint__4">
         <div class="select_compare">
-            <select class="select-container" id="select__s4--person" name="select__s3">
+            <h2 style="text-align: center; margin-top:20px; color: white ;">Ajustar las configuraciones para la recomendación</h2>
 
-            </select>
-            <select class="select__aggreation" id="select__aggreation" name="select__aggreation">
-                <option value="least">Least Misery</option>
-                <option value="maximun">Maximun pleasure</option>
-                <option value="median">Median Satisfaction</option>
-                <option value="similarity">Similarity Behavior</option>
-            </select>
+            <div class="inputsContainers">
+                <select class="select-container" id="select__s4--person" name="select__s3">
+
+                </select>
+                <select class="select__aggreation" id="select__aggreation" name="select__aggreation">
+                    <option value="least">Least Misery</option>
+                    <option value="maximun">Maximun pleasure</option>
+                    <option value="median">Median Satisfaction</option>
+                    <option value="similarity">Similarity Behavior</option>
+                </select>
+                <input class="recomendationNumber"type="number" placeholder="Cantidad">
+
+            </div>
+
+            <h3 class="seleccionatipos">Seleccionar los tipos de eventos que te interesan</h3>
+
+            <form class="inputDiv">
+                <label> Taller </label>
+                    <input type="checkbox" id="taller">
+                
+                <label> Concierto </label>
+                    <input type="checkbox" id="concierto">
+                
+                <label> Concurso </label>
+                    <input type="checkbox" id="concurso">
+                
+                <label> Actividad de danza o musica </label>
+                    <input type="checkbox" id="actividad">
+                
+                <label> Festival </label>
+                    <input type="checkbox" id="festival">
+            </form>
+
+            <h3 class="seleccionatipos">Seleccionar el peso del genero del evento</h3>
+       
             <div class="select-container" id="select__s4--slider" name="select__s4">
 
 
             </div>
 
-            <form class="inputDiv">
-                <label> Taller </label>
-                    <input type="radio" id="taller">
-                
-                <label> Concierto </label>
-                    <input type="radio" id="concierto">
-                
-                <label> Concurso </label>
-                    <input type="radio" id="concurso">
-                
-                <label> Actividad de danza o musica </label>
-                    <input type="radio" id="actividad">
-                
-                <label> Festival </label>
-                    <input type="radio" id="festival">
-            </form>
-
-
-
-            <button class="btn_recommend">Recommend</button>
+           
+            <button class="btn_recommend">Recomendar</button>
 
             <div class="personas_s4"></div>
-            <h1>Evento Culturales de Cali</h1>
+         
             <div class="recommendation">
 
             </div>
