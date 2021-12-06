@@ -103,7 +103,8 @@ let naive = 0;
 
 
     ///csv 1 personas
-    let response = await fetch('Sprint4_personas.csv');
+    let response = await fetch('personasPesos.csv');
+    // let response = await fetch('Sprint4_personas.csv');
 
     response = await response.text();
 
@@ -111,8 +112,8 @@ let naive = 0;
 
     ///////CSV de las Pizzas
 
-    // let pizzaFlavours = await fetch('pesos.csv');
-    let pizzaFlavours = await fetch('Sprint4_pizza.csv');
+    let pizzaFlavours = await fetch('pesos.csv');
+    // let pizzaFlavours = await fetch('Sprint4_pizza.csv');
 
     pizzaFlavours = await pizzaFlavours.text();
 
@@ -125,7 +126,8 @@ let naive = 0;
     //valores del slider
 
 
-    let baseObject = Object.keys(response[0]);
+    // let baseObject = Object.keys(response[0]);
+    let baseObject = Object.keys(pizzaFlavours[0]);
     //toping
     baseObject = baseObject.filter(element => element != 'nombre');
     baseObject = baseObject.forEach((element) => {
@@ -254,9 +256,11 @@ let naive = 0;
         recommendedPizzas = getPossibleOptions(pizzaFlavours, propsSimilar);
         console.log({ recommendedPizzas });
 
+
+        ///AQUI ES DONDE SE PINTA
         recommendedPizzas.forEach(pizza => {
 
-            recommendation.innerHTML += (`<p>${pizza.Pizza}</p>`);
+            recommendation.innerHTML += (`<p>${pizza.nombre}</p>`);
 
 
         })
@@ -330,7 +334,7 @@ function selectedValue(value, list) {
 }
 
 
-//excluir name 
+
 function similitudCoseno(a, b) {
 
     const vectorA = personToVector(a);
