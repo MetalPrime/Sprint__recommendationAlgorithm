@@ -1,7 +1,7 @@
 const options_elements = document.querySelector('.options_elements');
 const button = document.querySelector('.button');
 let options;
-
+let responseUser = []
 const buttonOpinion = document.querySelector('.buttonOpinion');
 const opinion_elements = document.querySelector('.opinion_elements');
 
@@ -23,13 +23,25 @@ console.log(button);
         let checkboxCheck = document.querySelectorAll('input[name="optionsCheck"]:checked');
         checkboxCheck.forEach((element=>{
             let select = new Likert(element);
-            opinion_elements.appendChild(select.render());
+            responseUser.push(select);
+            
         }))
+
+        responseUser.forEach(response =>{
+            opinion_elements.appendChild(response.render());
+        })
+        
         
     })
 
     buttonOpinion.addEventListener('click',()=>{
-
+        let data = []
+        responseUser.forEach(response =>{ 
+            data.push(response.info());
+            console.log(response.info())
+        })
+        console.log(data);
+        saveStaticDataToFile(data);
     })
 
 })();
@@ -48,3 +60,23 @@ function csvToArray(str, delimiter = ",") {
 
     return arr;
 }
+
+function saveStaticDataToFile(data) {
+    
+    saveAs(data, "resultado.txt");
+}
+
+let saveAs = (function () {
+    var a = document.createElement("a");
+    // document.body.appendChild(a);
+    // a.style = "display: none";
+    return function (data, fileName) {
+        var json = JSON.stringify(data),
+            blob = new Blob([json], {type: "text/plain;charset=utf-8"}),
+            url = window.URL.createObjectURL(blob);
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    };
+    }());
