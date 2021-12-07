@@ -95,6 +95,23 @@ let naive = 0;
 
 // })();
 
+const recommendations = document.querySelector(".recommendationsContainer");
+
+if(recommendations){
+
+    console.log(recommendations)
+let obj = {
+
+    title: "concierto",
+    date:"mañana",
+    place:"aquí"
+}
+let recommendationOBj = new Recommendation(obj)
+
+    
+recommendations.appendChild(recommendationOBj.render()) 
+}
+
 
 
 
