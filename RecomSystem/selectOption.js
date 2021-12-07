@@ -1,7 +1,8 @@
 class selectOption {
 
-    constructor(data) {
+    constructor(data,index) {
         this.data = data;
+        this.index = index;
     }
 
     render() {
@@ -11,6 +12,17 @@ class selectOption {
         option.innerHTML = this.data.nombre;
 
         return option;
+    }
+
+    renderCheckbox() {
+        const checkboxOptions = document.createElement("div");
+        checkboxOptions.className ="checkboxOptions";
+        checkboxOptions.innerHTML = `
+        <input type="checkbox" id={${this.index} value="${this.data.nombre}" name="optionsCheck"}
+        <p class="label"> ${this.data.nombre}</p>
+        `
+
+        return checkboxOptions;
     }
 
     renderSlider() {

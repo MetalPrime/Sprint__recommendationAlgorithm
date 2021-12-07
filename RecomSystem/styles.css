@@ -182,4 +182,9 @@
   line-height: normal;
   font-size: 26px;
 }
+
+.likert li {
+  float: left;
+  list-style-type: none;
+}
 /*# sourceMappingURL=styles.css.map */
