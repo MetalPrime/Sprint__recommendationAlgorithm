@@ -8,7 +8,7 @@ const opinion_elements = document.querySelector('.opinion_elements');
 
 console.log(button);
 (async () => {
-    let response = await fetch('pesos.csv');
+    let response = await fetch('eventosInfo.csv');
     response = await response.text();
     response = csvToArray(response);
     
@@ -42,6 +42,7 @@ console.log(button);
         })
         console.log(data);
         saveStaticDataToFile(data);
+        window.location="sliders.html";
     })
 
 })();
