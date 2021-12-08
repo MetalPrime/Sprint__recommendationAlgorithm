@@ -10,51 +10,60 @@ class Recommendation {
 
     container.innerHTML = `
         
-           
-            <div id= "recomImg" class="recomendation__img" ></div>
-            
-           
-            <div class="infoContainer">
-                <h3 class="recommendation__title">${this.recommendation.nombre}</h3>
-                <p class="recommendation__date">Fecha: ${this.recommendation.Fecha}</p>
-                <p class="recommendation__place">Hora:${this.recommendation.Hora}</p>
-                <p class="recommendation__place">Lugar:${this.recommendation.Lugar}</p>
+   
+    
+   
+    <div id="recomImg" class="infoContainer">
+        <div class="infoContainer__div" ></div>
+        <div class="infoContainer__info">
+        <h3 class="recommendation__title">${this.recommendation.nombre}</h3>
+        <p class="recommendation__date">Fecha: ${this.recommendation.Fecha}</p>
+        <p class="recommendation__place">Hora:${this.recommendation.Hora}</p>
+        <p class="recommendation__place">Lugar:${this.recommendation.Lugar}</p>
+        </div>
+    </div>
                 
-            </div>
+                
+           
             
 
        
 
     `;
 
-    const img = container.querySelector(".recomendation__img");
+    // const img = container.querySelector(".recomendation__img");
 
     const sample = container.querySelector("#recomImg");
-    
+    const div = container.querySelector(".infoContainer__info");
 
-    console.log(sample)
- 
-  
+
+
+
+
     if (this.recommendation.Tipo.includes("concierto")) {
-      //img.setAttribute("src", "./imagen/concierto.png");
       sample.style.backgroundImage = "url('./imagen/concierto.png')";
     }
+
     if (this.recommendation.Tipo.includes("taller")) {
-      // img.setAttribute("src", "./imagen/taller.png");
+      sample.style.backgroundImage = "url('./imagen/taller.png')";
     }
+
     if (this.recommendation.Tipo.includes("festival")) {
-     
-      img.style.backgroundImage="url('./imagen/festival.png')";
+      sample.style.backgroundImage = "url('./imagen/festival.png')";
     }
+
     if (this.recommendation.Tipo.includes("concurso")) {
-      // img.setAttribute("src", "./imagen/concurso.png");
+      sample.style.backgroundImage = "url('./imagen/concurso.png')";
     }
+
     if (this.recommendation.Tipo.includes("evento")) {
-      // img.setAttribute("src", "./imagen/concierto.png");
+      sample.style.backgroundImage = "url('./imagen/evento.png')";
+
     }
     if (this.recommendation.Tipo.includes("foro")) {
-      // img.setAttribute("src", "./imagen/taller2.png");
+      sample.style.backgroundImage = "url('./imagen/foro.png')";
     }
+
     return container;
   };
 }
