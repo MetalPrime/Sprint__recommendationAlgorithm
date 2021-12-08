@@ -19,6 +19,7 @@ const personas__uno = document.querySelector('.personas');
 const personas = document.querySelector('.personas_s4');
 const select__aggreation = document.querySelector('.select__aggreation');
 const recommendation = document.querySelector('.recommendation');
+const form_types = document.getElementById('form_types');
 let view;
 let options;
 let optionsS4;
@@ -26,6 +27,8 @@ let sliders = [];
 let listValuesSlider = [];
 let num = 0;
 let naive = 0;
+let inputsTypes = [];
+let opciones = [];
 
 
 (async () => {
@@ -37,7 +40,13 @@ let naive = 0;
     let pizzaFlavours = await fetch('NEWEVENTOS.csv');
     pizzaFlavours = await pizzaFlavours.text();
     pizzaFlavours = csvToArray(pizzaFlavours);
+
+    form_types.addEventListener("input", function(){
+        inputsTypes = document.querySelectorAll('input[name="types"]:checked')
+        
+    })
     ////
+
     let eventosInfo = await fetch('eventosInfo.csv');
     eventosInfo = await eventosInfo.text();
     eventosInfo = csvToArray(eventosInfo);
@@ -125,8 +134,17 @@ let naive = 0;
         naive = naiveAverage(KListProps);
         console.log({naive})
         console.log({propsSimilar});
-        recommendedPizzas = getPossibleOptions(pizzaFlavours, propsSimilar);
-        console.log({recommendedPizzas})
+        if(inputsTypes.length >0){
+            let copy = [...pizzaFlavours];
+            
+            copy = copy.filter(input => input[inputsTypes[0].value] === '10');
+            console.log({copy});
+            recommendedPizzas = getPossibleOptions(copy, propsSimilar);
+        } else {
+            recommendedPizzas = getPossibleOptions(pizzaFlavours, propsSimilar);
+        }
+        
+        
         ///AQUI ES DONDE SE PINTA
         recommendedPizzas.forEach(event => {
             eventosInfo.forEach(eventoBase => {

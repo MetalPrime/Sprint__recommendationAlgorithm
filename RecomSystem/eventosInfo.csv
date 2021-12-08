@@ -1,28 +1,28 @@
-nombre,Fecha,Hora,Lugar,hp
-Viernes de bohemia,4/6/2021,06:30 p.m,Teatro Al Aire Libre Los Cristales
-Ciclo de cine Marilyn Monroe,4/12/2021,8:00 am a 12:00m,Edificio El Retiro
-Estreno de Largometraje,4/12/2021,8:00 am a 12:00m,Edificio El Retiro
-Simposio sobre el largometraje MarÌa,4/12/2021,8:00 am a 12:00m,Edificio El Retiro
-Concierto Cristales,4/14/2021,05:00 p.m,Teatro Al Aire Libre Los Cristales
-D'Regreso a Mi Tierra,4/18/2021,02:00 p.m,Teatro Municipal Enrique Buenaventura
-XVII FESTIVAL INTERNACIONAL DE TITERES,4/21/2021,08:00 a.m,Santiago de Cali 
-American Film Showcase,4/23/2021,6:00pm a 8:00pm / 9:00am a 12:00m,Centro Cultural Colombo Americano
-Semana del libro - celebracion dia del libro y la niñez,4/23/2021,8:00am a 5:00pm ,Centro Cultural de Cali
-Audiciones METROPOLIS,4/25/2021,08:00 a.m,Centro Cultural de Cali
-Concierto navideño,12/15/2021,04:00 p.m,Teatro Al Aire Libre Los Cristales
-61 Feria de Cali,12/25/2021,05:00 p.m, CORFECALI
-4 decadas de EUFORIA con Ensalsate,12/26/2021,08:00 p.m,Hotel Dann Carlton
-Espectaculo Delirio,12/26/2021,07:00 p.m,Valle del Pacifico Centro de Eventos
-Fiesta Andina,12/27/2021,4:00 pm - 9:00 pm ,Parque Artesanal Loma de la Cruz
-Talleres de danzas indÌgenas,1/4/2021,7:00 pm a 9:00 pm,Parque Artesanal Loma de la Cruz
-Caliwood- Actividades diarias ,1/15/2021,8:00 am a 12:00m./ 2:00 p.m. a 6:00 p.m.,Edificio El Retiro
-Espectaculo Delirio,1/26/2021,07:00 p.m,Valle del Pacifico Centro de Eventos
-Convocatoria METROPOLIS,2/1/2021,08:00 a.m,Centro Cultural de Cali
-4 décadas de EUFORIA con Ensálsate,2/16/2021,08:00 p.m,Hotel Dann Carlton
-Día de la Afrocolombianidad y día mundial de la diversidad cultural,5/21/2021,10:00pm a 6:00pm ,Centro Cultural de Cali
-Festival de la Herencia Africano,5/21/2021,9:00am a 10:00pm ,Plazoleta San Francisco
-Homenaje a las Madres en Teatro Al Aire Libre Los Cristales,5/26/2021,06:30 p.m,Teatro Al Aire Libre Los Cristales
-CEREMONIA DE PROMOCION ROCKOPOLIS,5/29/2021,07:00 p.m,Auditorio Centro Cultural Comando
-XXIV ENCUENTRO DE DANZAS FOLCLÓRICAS MERCEDES,6/1/2021,6:00pm a 8:00pm ,Teatro Municipal Enrique Buenaventura
-IX Encuentro Popular de Teatro Joven,6/1/2021,07:00 p.m,Carrera 29 A # 45 - 72
-XI Festival internacional de Ballet,6/10/2021,5:00pm a 9:00pm ,Fundación Danza Conmigo 
+nombre,Fecha,Hora,Lugar,Tipo,hp
+Viernes de bohemia,4/6/2021,06:30 p.m,Teatro Al Aire Libre Los Cristales,concierto
+Ciclo de cine Marilyn Monroe,4/12/2021,8:00 am a 12:00m,Edificio El Retiro,foro
+Estreno de Largometraje,4/12/2021,8:00 am a 12:00m,Edificio El Retiro,foro
+Simposio sobre el largometraje MarÌa,4/12/2021,8:00 am a 12:00m,Edificio El Retiro,foro
+Concierto Cristales,4/14/2021,05:00 p.m,Teatro Al Aire Libre Los Cristales,concierto
+D'Regreso a Mi Tierra,4/18/2021,02:00 p.m,Teatro Municipal Enrique Buenaventura,evento
+XVII FESTIVAL INTERNACIONAL DE TITERES,4/21/2021,08:00 a.m,Santiago de Cali,festival
+American Film Showcase,4/23/2021,6:00pm a 8:00pm / 9:00am a 12:00m,Centro Cultural Colombo Americano,festival
+Semana del libro - celebracion dia del libro y la niñez,4/23/2021,8:00am a 5:00pm ,Centro Cultural de Cali,festival
+Audiciones METROPOLIS,4/25/2021,08:00 a.m,Centro Cultural de Cali,evento
+Concierto navideño,12/15/2021,04:00 p.m,Teatro Al Aire Libre Los Cristales,concierto
+61 Feria de Cali,12/25/2021,05:00 p.m, CORFECALI,festival
+4 decadas de EUFORIA con Ensalsate,12/26/2021,08:00 p.m,Hotel Dann Carlton,evento
+Espectaculo Delirio,12/26/2021,07:00 p.m,Valle del Pacifico Centro de Eventos,evento
+Fiesta Andina,12/27/2021,4:00 pm - 9:00 pm ,Parque Artesanal Loma de la Cruz,evento
+Talleres de danzas indÌgenas,1/4/2021,7:00 pm a 9:00 pm,Parque Artesanal Loma de la Cruz,taller
+Caliwood- Actividades diarias ,1/15/2021,8:00 am a 12:00m./ 2:00 p.m. a 6:00 p.m.,Edificio El Retiro,taller
+Espectaculo Delirio,1/26/2021,07:00 p.m,Valle del Pacifico Centro de Eventos,evento
+Convocatoria METROPOLIS,2/1/2021,08:00 a.m,Centro Cultural de Cali,foro
+4 décadas de EUFORIA con Ensálsate,2/16/2021,08:00 p.m,Hotel Dann Carlton,evento
+Día de la Afrocolombianidad y día mundial de la diversidad cultural,5/21/2021,10:00pm a 6:00pm ,Centro Cultural de Cali,evento
+Festival de la Herencia Africano,5/21/2021,9:00am a 10:00pm ,Plazoleta San Francisco,festival
+Homenaje a las Madres en Teatro Al Aire Libre Los Cristales,5/26/2021,06:30 p.m,Teatro Al Aire Libre Los Cristales,concierto
+CEREMONIA DE PROMOCION ROCKOPOLIS,5/29/2021,07:00 p.m,Auditorio Centro Cultural Comando,evento
+XXIV ENCUENTRO DE DANZAS FOLCLÓRICAS MERCEDES,6/1/2021,6:00pm a 8:00pm ,Teatro Municipal Enrique Buenaventura,evento
+IX Encuentro Popular de Teatro Joven,6/1/2021,07:00 p.m,Carrera 29 A # 45 - 72,evento
+XI Festival internacional de Ballet,6/10/2021,5:00pm a 9:00pm ,Fundación Danza Conmigo,festival
