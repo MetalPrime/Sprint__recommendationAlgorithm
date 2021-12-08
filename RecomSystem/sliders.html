@@ -12,16 +12,10 @@
 </head>
 
 <body class="bodySliders">
-
-   
-   
-
-
-
-
     <div class="sprint__4">
         <div class="select_compare">
-            <h2 style="text-align: center; margin-top:20px; color: white ;">Ajustar las configuraciones para la recomendación</h2>
+            <h2 style="text-align: center; margin-top:20px; color: white ;">Ajustar las configuraciones para la
+                recomendación</h2>
 
             <div class="inputsContainers">
                 <select class="select-container" id="select__s4--person" name="select__s3">
@@ -33,7 +27,7 @@
                     <option value="median">Median Satisfaction</option>
                     <option value="similarity">Similarity Behavior</option>
                 </select>
-                <input class="recomendationNumber"type="number" placeholder="Cantidad">
+                <input class="recomendationNumber" type="number" placeholder="Cantidad">
 
             </div>
 
@@ -41,50 +35,53 @@
 
             <form class="inputDiv">
                 <label> Taller </label>
-                    <input type="checkbox" id="taller">
-                
+                <input type="checkbox" id="taller">
+
                 <label> Concierto </label>
-                    <input type="checkbox" id="concierto">
-                
+                <input type="checkbox" id="concierto">
+
                 <label> Concurso </label>
-                    <input type="checkbox" id="concurso">
-                
+                <input type="checkbox" id="concurso">
+
                 <label> Actividad de danza o musica </label>
-                    <input type="checkbox" id="actividad">
-                
+                <input type="checkbox" id="actividad">
+
                 <label> Festival </label>
-                    <input type="checkbox" id="festival">
+                <input type="checkbox" id="festival">
             </form>
 
             <h3 class="seleccionatipos">Seleccionar el peso del genero del evento</h3>
-       
+
             <div class="select-container" id="select__s4--slider" name="select__s4">
 
 
             </div>
 
-           
+
             <button class="btn_recommend">Recomendar</button>
 
             <div class="personas_s4"></div>
-         
+
             <div class="recommendation">
 
             </div>
+
+
+            <section class="bodyRecommendation">
+                <h2 class="title">Eventos Culturales</h2>
+
+                <div class="recommendationsContainer">
+
+                </div>
+            </section>
         </div>
-
-        <!-- <div class="distancia">
-            <div class="personas">
-                <div class="personas__uno"></div>
-
-            </div>
-        </div> -->
 
 
 
     </div>
 </body>
 
+<script src="./recommendation.js"></script>
 <script src="./selectOption.js"></script>
 <script src="./viewData.js"></script>
 <script src="./index.js"></script>

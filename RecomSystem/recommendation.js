@@ -1,43 +1,37 @@
 class Recommendation {
+  constructor(recommendation) {
+    this.recommendation = recommendation;
+  }
 
+  render = () => {
+    const container = document.createElement("div");
+    container.className = "recommendationsContainer";
 
-    constructor(recommendation) {
-
-        this.recommendation = recommendation;
-    }
-
-
-    render = () => {
-
-        const container = document.createElement("div");
-        container.className = "recommendation"
-
-        container.innerHTML = `
+    container.innerHTML = `
         
-        
-        
+           
             <img class="recomendation__img" src="" >
-
+        
+            <div class="recommendation__div">  </div>
             <div class="infoContainer">
-                <p class="recommendation__title">${this.recommendation.title}</p>
-            <p class="recommendation__date">hoy ${this.recommendation.date}</p>
-            <p class="recommendation__place">${this.recommendation.place}</p>
-
+                <h3 class="recommendation__title">${this.recommendation.nombre}</h3>
+                <p class="recommendation__date">Fecha: ${this.recommendation.Fecha}</p>
+                <p class="recommendation__place">Hora:${this.recommendation.Hora}</p>
+                <p class="recommendation__place">Lugar:${this.recommendation.Lugar}</p>
             </div>
             
 
        
 
-    `
+    `;
 
-    console.log(this.recommendation.title)
-        const img = container.querySelector(".recomendation__img");
-        console.log(img)
+    const img = container.querySelector(".recomendation__img");
 
-        if(this.recommendation.title.includes("concierto")){
+    const sample = document.getElementById("recomImg");
 
-            img.setAttribute("src","./imagen/concierto.png")
-        };
-        return container;
+    if (this.recommendation.nombre.includes("concierto")) {
+      img.setAttribute("src", "./imagen/concierto.png");
     }
+    return container;
+  };
 }
